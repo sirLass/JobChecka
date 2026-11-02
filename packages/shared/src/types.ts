@@ -39,6 +39,8 @@ export interface Post {
   description: string;
   contact?: string;
   salaryText?: string;
+  /** Employer website or posting link, when known (source_url in the jobs table). */
+  sourceUrl?: string;
 }
 
 /** A single red flag produced by the AI explanation layer. */

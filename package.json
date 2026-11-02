@@ -2,6 +2,7 @@
   "name": "jobsafe",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "description": "JobSafe Tracker - a private job tracker for Philippine job seekers with scam warning checks.",
   "packageManager": "pnpm@11.21.0",
   "engines": {
@@ -17,7 +18,8 @@
     "test:watch": "vitest",
     "dev:web": "pnpm --filter @jobsafe/web dev",
     "build:web": "pnpm --filter @jobsafe/web build",
-    "test:groq": "node tools/groq-model-test.mjs"
+    "test:groq": "node tools/groq-model-test.mjs",
+    "eval": "node eval/run-eval.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

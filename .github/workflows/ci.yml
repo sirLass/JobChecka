@@ -35,6 +35,9 @@ jobs:
       - name: Tests
         run: pnpm test
 
+      - name: Scam rule eval
+        run: node eval/run-eval.ts
+
   secrets:
     name: Secrets scan
     runs-on: ubuntu-latest

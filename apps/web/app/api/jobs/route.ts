@@ -3,10 +3,13 @@ import { contentHash } from "@jobsafe/shared";
 import { ApiError, handleApiError, json, parseBody, parseQuery, requireUser } from "@/lib/api";
 import { jobCreateSchema, jobsListQuerySchema } from "@/lib/validation";
 import { rateLimit, rateLimitKey } from "@/lib/rate-limit";
+import { runRules } from "@/lib/scam/rules";
+import { combineRisk, confidenceFor } from "@/lib/scam/score";
 
 /**
  * GET  /api/jobs  — list the signed-in user's jobs (filters, search, pagination).
- * POST /api/jobs  — create a job (capture or paste) + its default application row.
+ * POST /api/jobs  — create a job (capture or paste), run the instant rules check
+ *                   (plan section 3: save -> run rules), and record the result.
  * DELETE /api/jobs — delete ALL of the user's jobs (settings page).
  */
 
@@ -91,7 +94,40 @@ export async function POST(request: NextRequest) {
       console.error("[api/jobs] application seed failed:", appError.code);
     }
 
-    return json({ job, status: "saved" }, 201);
+    // Phase 2: instant rules-only scam check. AI/tool checks land in Phase 4;
+    // the check row already exists so the UI and status flow are stable.
+    const ruleHits = runRules({
+      title: body.title,
+      company: body.company_name,
+      description: body.description,
+      contact: body.contact_text,
+      salaryText: body.salary_text,
+      sourceUrl: body.source_url,
+    });
+    const level = combineRisk(ruleHits);
+    const at = new Date().toISOString();
+
+    // Non-fatal if persisting fails: the job is saved either way.
+    const { data: check, error: checkError } = await supabase
+      .from("scam_checks")
+      .insert({
+        job_id: (job as { id: string }).id,
+        user_id: user.id,
+        risk_level: level,
+        confidence: confidenceFor(level),
+        rules_fired: ruleHits,
+        status: "done",
+        used_ai: false,
+        started_at: at,
+        finished_at: at,
+      })
+      .select()
+      .single();
+    if (checkError) {
+      console.error("[api/jobs] scam check insert failed:", checkError.code);
+    }
+
+    return json({ job, check: check ?? null, status: "saved" }, 201);
   } catch (error) {
     return handleApiError(error);
   }

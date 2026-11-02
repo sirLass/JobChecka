@@ -29,7 +29,15 @@ export async function GET(_request: NextRequest, ctx: { params: Promise<{ id: st
     if (error) throw new ApiError(500, "Could not load the job");
     if (!data) throw badId();
 
-    return json({ job: data });
+    // Latest scam check for the check panel (rules-only in Phase 2).
+    const { data: checks } = await supabase
+      .from("scam_checks")
+      .select("id, risk_level, confidence, rules_fired, status, used_ai, created_at")
+      .eq("job_id", id)
+      .order("created_at", { ascending: false })
+      .limit(1);
+
+    return json({ job: data, check: checks?.[0] ?? null });
   } catch (error) {
     return handleApiError(error);
   }

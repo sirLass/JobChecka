@@ -2,6 +2,7 @@
   "name": "@jobsafe/web",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "description": "JobSafe Tracker dashboard + API. Phase 1: Next.js + Tailwind + Supabase auth (magic link) + jobs CRUD.",
   "scripts": {
     "dev": "next dev",

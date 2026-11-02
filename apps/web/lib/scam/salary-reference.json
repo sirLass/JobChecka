@@ -1,0 +1,261 @@
+{
+  "source": "Approximate monthly PHP bands kept intentionally wide. Anchored on the DOLE/NWPC daily minimum wage (NCR non-agricultural ~P645/day -> ~P14,190/month at 22 working days), cross-checked against public JobStreet PH / Indeed PH posting ranges for common role families. Last reviewed 2026-11-02. Only offers far above the family ceiling are flagged (see apps/web/lib/scam/salary.ts thresholds); below-floor offers are never flagged because part-time and per-project wording legitimately produces small numbers. USD amounts are converted with the fixed reference rate below.",
+  "rates": {
+    "usd_php": 58,
+    "working_hours_per_month": 176,
+    "working_days_per_month": 22,
+    "weeks_per_month": 4.33
+  },
+  "families": [
+    {
+      "id": "it_developer",
+      "label": "IT / software development",
+      "match": [
+        "developer",
+        "programmer",
+        "software engineer",
+        "web developer",
+        "mobile developer",
+        "qa",
+        "devops",
+        "sysadmin",
+        "systems admin",
+        "it support",
+        "network admin",
+        "back end",
+        "front end",
+        "fullstack",
+        "full stack"
+      ],
+      "floor": 30000,
+      "median": 55000,
+      "ceiling": 130000
+    },
+    {
+      "id": "finance_accounting",
+      "label": "Finance / accounting",
+      "match": [
+        "accountant",
+        "accounting",
+        "bookkeep",
+        "cpa",
+        "teller",
+        "finance",
+        "financial",
+        "auditor",
+        "bank",
+        "loan officer",
+        "collector"
+      ],
+      "floor": 22000,
+      "median": 30000,
+      "ceiling": 55000
+    },
+    {
+      "id": "teacher_tutor",
+      "label": "Teaching / tutoring",
+      "match": ["tutor", "teacher", "professor", "instructor", "education", "trainer"],
+      "floor": 15000,
+      "median": 25000,
+      "ceiling": 45000
+    },
+    {
+      "id": "health_care",
+      "label": "Health / care work",
+      "match": [
+        "nurse",
+        "nursing",
+        "caregiver",
+        "care aide",
+        "health",
+        "midwife",
+        "medical",
+        "pharmacist",
+        "dental"
+      ],
+      "floor": 16000,
+      "median": 22000,
+      "ceiling": 40000
+    },
+    {
+      "id": "engineering",
+      "label": "Engineering / technical trades",
+      "match": ["engineer", "engineering", "architect", "draftsman", "cadet", "surveyor"],
+      "floor": 25000,
+      "median": 40000,
+      "ceiling": 90000
+    },
+    {
+      "id": "creative_design",
+      "label": "Design / creative",
+      "match": [
+        "graphic",
+        "designer",
+        "illustrator",
+        "animator",
+        "video editor",
+        "motion graphics",
+        "creative"
+      ],
+      "floor": 22000,
+      "median": 35000,
+      "ceiling": 85000
+    },
+    {
+      "id": "encoding_data",
+      "label": "Encoding / data entry",
+      "match": ["encoder", "encoding", "data entry", "typing", "transcription", "data management"],
+      "floor": 16000,
+      "median": 22000,
+      "ceiling": 30000
+    },
+    {
+      "id": "admin_office",
+      "label": "Admin / office work",
+      "match": [
+        "administrative",
+        "admin",
+        "secretary",
+        "secretarial",
+        "assistant",
+        "coordinator",
+        "office clerk",
+        "receptionist",
+        "executive assistant"
+      ],
+      "floor": 18000,
+      "median": 25000,
+      "ceiling": 45000
+    },
+    {
+      "id": "hr_recruiting",
+      "label": "HR / recruiting",
+      "match": ["hr", "human resource", "recruiter", "recruitment", "talent acquisition"],
+      "floor": 18000,
+      "median": 28000,
+      "ceiling": 70000
+    },
+    {
+      "id": "bpo_customer_service",
+      "label": "BPO / customer service",
+      "match": [
+        "customer service",
+        "call center",
+        "bpo",
+        "csr",
+        "tsr",
+        "customer support",
+        "chat support",
+        "customer experience"
+      ],
+      "floor": 18000,
+      "median": 25000,
+      "ceiling": 40000
+    },
+    {
+      "id": "sales_marketing",
+      "label": "Sales / marketing",
+      "match": [
+        "sales",
+        "seller",
+        "saleslady",
+        "salesman",
+        "telemarketer",
+        "marketing",
+        "promoter",
+        "merchandiser"
+      ],
+      "floor": 14000,
+      "median": 22000,
+      "ceiling": 45000
+    },
+    {
+      "id": "driver_delivery",
+      "label": "Driving / delivery",
+      "match": ["driver", "delivery", "rider", "courier", "dispatcher", "van", "trucker"],
+      "floor": 14000,
+      "median": 20000,
+      "ceiling": 35000
+    },
+    {
+      "id": "construction",
+      "label": "Construction / skilled trades",
+      "match": [
+        "carpenter",
+        "mason",
+        "welder",
+        "laborer",
+        "construction",
+        "steel",
+        "electrician",
+        "plumber",
+        "foreman",
+        "painter",
+        "roofer"
+      ],
+      "floor": 15000,
+      "median": 22000,
+      "ceiling": 40000
+    },
+    {
+      "id": "hotel_resto",
+      "label": "Hotel / restaurant",
+      "match": [
+        "server",
+        "waiter",
+        "waitress",
+        "kitchen",
+        "barista",
+        "cook",
+        "bartender",
+        "housekeeping",
+        "housekeeper",
+        "room attendant",
+        "food"
+      ],
+      "floor": 12000,
+      "median": 16000,
+      "ceiling": 30000
+    },
+    {
+      "id": "factory_operator",
+      "label": "Factory / production",
+      "match": [
+        "operator",
+        "production",
+        "assembly",
+        "manufacturing",
+        "machine",
+        "quality control",
+        "qc"
+      ],
+      "floor": 14000,
+      "median": 18000,
+      "ceiling": 32000
+    },
+    {
+      "id": "farm_agri",
+      "label": "Farm / agriculture",
+      "match": ["farm", "agricultur", "plantation", "harvest", "poultry", "livestock"],
+      "floor": 12000,
+      "median": 15000,
+      "ceiling": 28000
+    },
+    {
+      "id": "retail_shopper",
+      "label": "Retail / store roles",
+      "match": ["retail", "store", "bagging", "grocery", "supermarket", "cashier", "bagging staff"],
+      "floor": 12000,
+      "median": 16000,
+      "ceiling": 30000
+    },
+    {
+      "id": "general",
+      "label": "General / unlisted roles",
+      "match": ["staff", "helper", "crew", "utility", "clerk", "aide", "messenger", "personnel"],
+      "floor": 14000,
+      "median": 20000,
+      "ceiling": 45000
+    }
+  ]
+}

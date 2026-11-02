@@ -51,3 +51,21 @@ export const SUPPORTED_SITES = {
   jobstreet: ["https://*.jobstreet.com.ph/*"],
   indeed: ["https://ph.indeed.com/*"],
 } as const;
+
+/** Deterministic rule ids used by the Phase 2 engine (PRD 5.2).
+ *  These match `expected_flags` in eval/dataset per its README ground rules. */
+export const RULE_IDS = [
+  "fee_request",
+  "off_platform_chat",
+  "free_email",
+  "email_website_mismatch",
+  "unrealistic_pay",
+  "vague_duties",
+  "missing_identity",
+  "urgency_pressure",
+  "sensitive_data",
+  "suspicious_link",
+] as const;
+
+/** Overall result levels for scam checks (scam_checks.risk_level, eval risk_label, UI badges). */
+export const RISK_LEVELS = ["low_signals", "caution", "high_risk"] as const;

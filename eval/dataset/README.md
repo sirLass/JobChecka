@@ -29,7 +29,7 @@ Schema (aligns with `packages/shared` types once Phase 1 lands):
   "contact_text": "Contact: 09xx-xxx-xxxx or hiring.acme@gmail.com",
   "source_url": null, // strip or fake URLs; do not leave live scams clickable
   "labels": ["no_specs_of_actual_job", "free_gmail_address", "too_good_to_be_true_salary"],
-  "risk_label": "high_risk", // ground truth: "no_signals" | "caution" | "high_risk"
+  "risk_label": "high_risk", // ground truth: "low_signals" | "caution" | "high_risk"
   "added": "2026-11-02",
   "notes": "why this label was given, anything tricky"
 }

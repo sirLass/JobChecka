@@ -7,6 +7,7 @@ import { formatDateTime } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { JobActions } from "@/components/job-actions";
+import { ScamCheckPanel, type ScamCheckView } from "@/components/scam-check-panel";
 
 export const metadata: Metadata = {
   title: "Job details",
@@ -56,7 +57,17 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
       .select("*, applications(status, notes, applied_at)")
       .eq("id", id)
       .maybeSingle();
-    data = row;
+    let checkRow: ScamCheckView | null = null;
+    if (row) {
+      const { data: checks } = await supabase
+        .from("scam_checks")
+        .select("risk_level, confidence, rules_fired, used_ai, created_at")
+        .eq("job_id", id)
+        .order("created_at", { ascending: false })
+        .limit(1);
+      checkRow = (checks?.[0] as unknown as ScamCheckView) ?? null;
+    }
+    data = row ? { row, check: checkRow } : null;
   } catch (e) {
     notConfigured = e instanceof Error && e.message.includes("NEXT_PUBLIC_SUPABASE");
     if (!notConfigured) throw e;
@@ -80,7 +91,11 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
   // RLS scopes this to the owner; null here means "not yours / gone".
   if (!data) notFound();
 
-  const job = data as unknown as JobDetail;
+  const { row, check } = data as unknown as {
+    row: JobDetail;
+    check: ScamCheckView | null;
+  };
+  const job = row;
   const application = job.applications?.[0];
   const status = application?.status ?? "saved";
 
@@ -173,21 +188,15 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Scam checks</CardTitle>
-              <CardDescription>
-                Warning-sign checks land here in Phase 2 — the rules engine runs automatically on
-                saved posts.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-zinc-600">
-                Until then, please be cautious: never pay fees to apply and hold back IDs or bank
-                details until a contract is signed.
-              </p>
-            </CardContent>
-          </Card>
+          <ScamCheckPanel
+            check={check}
+            verification={{
+              companyName: job.company_name ?? undefined,
+              sourceUrl: job.source_url ?? undefined,
+              description: job.description,
+              sourcePlatform: job.source_platform,
+            }}
+          />
         </div>
       </div>
     </section>
