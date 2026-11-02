@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Base page styling. The design system uses plain Tailwind palette classes
+   (zinc neutrals + teal primary) in the components; these rules only set
+   defaults and global focus-visible behavior. */
+body {
+  background-color: var(--color-zinc-50);
+  color: var(--color-zinc-900);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-teal-700);
+  outline-offset: 2px;
+}

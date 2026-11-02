@@ -12,9 +12,11 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit -p packages/shared",
+    "typecheck": "tsc --noEmit -p packages/shared && pnpm --filter @jobsafe/web typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
+    "dev:web": "pnpm --filter @jobsafe/web dev",
+    "build:web": "pnpm --filter @jobsafe/web build",
     "test:groq": "node tools/groq-model-test.mjs"
   },
   "devDependencies": {
@@ -25,5 +27,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.0",
     "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "globals": "^16.5.0"
   }
 }

@@ -2,6 +2,7 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import prettierConfig from "eslint-config-prettier";
+import globals from "globals";
 
 export default tseslint.config(
   {
@@ -9,6 +10,8 @@ export default tseslint.config(
       "**/dist/**",
       "**/coverage/**",
       "**/node_modules/**",
+      "**/.next/**",
+      "**/next-env.d.ts",
       "pnpm-lock.yaml",
       "**/*.jsonl",
       "eval/groq-results/**",
@@ -26,8 +29,14 @@ export default tseslint.config(
     },
   },
   {
-    // Tooling files may use console freely.
+    // Tooling files may use console and stand-alone Node/browser globals.
     files: ["**/*.mjs", "**/*.config.*"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
+    },
     rules: {
       "no-console": "off",
     },
