@@ -34,6 +34,7 @@ Per project, in Dashboard > Authentication > Providers:
   Mailgun) works. Do not launch beta on the shared Supabase mailer.
 
 Also set:
+
 - Authentication > URL Configuration: Site URL = `http://localhost:3000` (dev) and the prod
   domain later; add the prod redirect URLs for the popup/extension callback if we use OAuth.
 
