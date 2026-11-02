@@ -16,11 +16,7 @@ export interface HashableJob {
 
 export async function contentHash(job: HashableJob): Promise<string> {
   const text = [job.title ?? "", job.company ?? "", job.description].join(SEPARATOR);
-  const normalized = text
-    .replace(/\r\n/g, "\n")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
+  const normalized = text.replace(/\r\n/g, "\n").replace(/\s+/g, " ").trim().toLowerCase();
   const bytes = new TextEncoder().encode(normalized);
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");

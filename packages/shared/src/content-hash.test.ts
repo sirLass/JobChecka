@@ -11,13 +11,20 @@ describe("contentHash", () => {
     const a = await contentHash({
       title: "Customer Service Rep",
       company: "ACME Corp",
-      description: "Urgent!   Apply\nnow.",
+      description: "Urgent!   Apply\nnow.  Visit our office.",
     });
+    // Same tokens in the same order, different whitespace and letter case.
     const b = await contentHash({
       title: "Customer  Service Rep",
       company: "ACME Corp",
-      description: "apply\r\nnow. urgent!",
+      description: "urgent!\tapply\r\nnow. visit our office.",
     });
+    expect(a).toBe(b);
+  });
+
+  it("is identical up to case differences", async () => {
+    const a = await contentHash({ description: "Data Encoder, Monday to Friday" });
+    const b = await contentHash({ description: "DATA ENCODER, Monday to Friday" });
     expect(a).toBe(b);
   });
 
