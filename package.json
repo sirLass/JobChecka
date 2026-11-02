@@ -1,0 +1,29 @@
+{
+  "name": "jobsafe",
+  "version": "0.0.1",
+  "private": true,
+  "description": "JobSafe Tracker - a private job tracker for Philippine job seekers with scam warning checks.",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p packages/shared",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:groq": "node tools/groq-model-test.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4"
+  }
+}

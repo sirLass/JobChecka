@@ -1,0 +1,7 @@
+{
+  "name": "@jobsafe/web",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Next.js dashboard + API (Phase 1). Placeholder manifest until scaffolding in Phase 1.",
+  "scripts": {}
+}

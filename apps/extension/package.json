@@ -1,0 +1,7 @@
+{
+  "name": "@jobsafe/extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome MV3 extension for JobStreet PH / Indeed PH capture (Phase 3). Placeholder manifest until scaffolding in Phase 3.",
+  "scripts": {}
+}

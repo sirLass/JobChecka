@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Builds
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+
+# Local env files - NEVER commit real secrets
+.env
+.env.*
+!.env.example
+.envrc
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Extension build / signing artifacts
+*.crx
+*.pem
+extension-keys/
+
+# Ephemeral outputs
+eval/groq-results/
+eval/dataset/raw/

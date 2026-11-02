@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# explicitly allow esbuild's postinstall (binary validation); everything else runs no build scripts
+allowBuilds:
+  esbuild: true
